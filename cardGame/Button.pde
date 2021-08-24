@@ -55,12 +55,5 @@ class ImageButton extends Button
   }
 
   void draw()
-  {
-    strokeWeight(this.strokeWidth);
-    stroke(0,200);
-    fill(0,0)
-    rect(this.x, this.y, this.w, this.h);
-
-    image(this.image, this.x, this.y, this.w, this.h);
-  }
+  { image(this.image, this.x, this.y, this.w, this.h); }
 }

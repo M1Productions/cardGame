@@ -1,21 +1,30 @@
 class MainMenue
 {
-  Button playBt, accountBt;
+  Button playBt, settingsBt;
+  ImageButton accountIBt;
 
   MainMenue()
   {
-    playBt = new Button(width/2-width/10, height/2-height/10, width/5, height/10, #1025FF, "PLAY", 0);
-    accountBt = new Button(width/2-width/10, height/2-height/20, width/5, height/10, #1025FF, "My account", 0);
+    playBt = new Button(width/2-width/10, height/3, width/5, height/10, #1025FF, "PLAY", 0);
+    settingsBt = new Button(width/2-width/10, height/3*2, width/5, height/10, #1025FF, "Settings", 0);
+    accountIBt = new ImageButton(width/2-width/10, 0, width/5, width/5, accountImg);
 
     createError("Account logged out");
   }
 
   void draw()
   {
-    this.accountBt.draw();
-    if(this.accountBt.mouseOver())
+    this.accountIBt.draw();
+    if(this.accountIBt.mouseOver())
     {
-      this.accountBt.highlight();
+      this.accountIBt.highlight();
+      cursorChange=12;
+    }
+
+    this.settingsBt.draw();
+    if(this.settingsBt.mouseOver())
+    {
+      this.settingsBt.highlight();
       cursorChange=12;
     }
 
@@ -32,12 +41,17 @@ class MainMenue
     if(this.playBt.mouseOver())
     {
       loadingScreen.draw();
-      play();
+      play = true;
     }
-    else if(this.accountBt.mouseOver())
+    else if(this.settingsBt.mouseOver())
     {
       loadingScreen.draw();
-      //todo account settings
+      openSettings();
+    }
+    else if(this.accountIBt.mouseOver())
+    {
+      loadingScreen.draw();
+      openAccountMenue();
     }
   }
 }
