@@ -4,7 +4,7 @@ class Button
   int strokeWidth, centerX, centerY;
   color col, txtCol;
   String txt;
-  
+
   Button(int x, int y, int w, int h, color col, String txt, color txtCol)
   {
     this.x = x;
@@ -14,32 +14,53 @@ class Button
     this.col = col;
     this.txt = txt;
     this.txtCol = txtCol;
-    
+
     this.strokeWidth = this.h/6;
     this.centerX = this.x+this.w/2;
     this.centerY = this.y+this.h/2;
   }
-  
+
   void draw()
   {
     strokeWeight(this.strokeWidth);
     stroke(this.col);
     fill(this.col,100);
     rect(this.x, this.y, this.w, this.h);
-    
+
     fill(txtCol);
     textSize(this.h/2);
     textAlign(CENTER, CENTER);
     text(this.txt, this.centerX, this.centerY);
   }
-  
+
   void highlight()
   {
     strokeWeight(0);
     fill(100,100);
     rect(this.x, this.y, this.w, this.h);
   }
-  
+
   Boolean mouseOver()
   { return this.x<=mouseX && mouseX<=this.x+this.w && this.y<=mouseY && mouseY<=this.y+this.h; }
+}
+
+class ImageButton extends Button
+{
+  PImage image;
+
+  ImageButton(int x, int y, int w, int h, PImage image)
+  {
+    super(x,y,w,h,0,"",0);
+    this.image = image;
+  }
+
+  void draw()
+  {
+    strokeWeight(this.strokeWidth);
+    stroke(0,200);
+    fill(0,0)
+    rect(this.x, this.y, this.w, this.h);
+
+    image(this.image, this.x, this.y, this.w, this.h);
+  }
 }
