@@ -1,0 +1,17 @@
+DROP TABLE Card IF EXISTS;
+
+CREATE TABLE personCard
+(
+	name		VARCHAR(32) PRIMARY KEY,
+	cost		INTEGER,
+	atk		INTEGER,
+	dfp		INTEGER,
+	role1		VARCHAR(16),
+	role2		VARCHAR(16),
+);
+
+CREATE TABLE eventCard
+(
+	name		VARCHAR(32) PRIMARY KEY,
+	cost		INTEGER
+);

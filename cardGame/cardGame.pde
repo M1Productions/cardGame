@@ -1,7 +1,7 @@
 int mode=0, cursorChange, fade=0;
 String errorText = "";
 boolean play=false;
-PImage accountImg, cardBackImg, dumpingGroundImg;
+PImage accountImg, cardBackImg, dumpingGroundImg, shieldImg, bombImg;
 
 LoadingScreen loadingScreen;
 MainMenue mainMenue;
@@ -13,6 +13,8 @@ void setup()
 {
   size(1600,1000);
 
+  bombImg = loadImage("bomb.png");
+  shieldImg = loadImage("shield.png");
   accountImg = loadImage("noAccount.png");
   cardBackImg = loadImage("cardBack.png");
   dumpingGroundImg = loadImage("dumpingGround.png");
