@@ -13,7 +13,8 @@ class AccountMenue
   {
     menueBt.draw();    
     loginBt.draw();
-    logOutBt.draw();
+    if(logedIn)
+    { logOutBt.draw(); }
     
     if(menueBt.mouseOver()) //if the mouse is over one of the buttons
     {
@@ -25,7 +26,7 @@ class AccountMenue
       loginBt.highlight();
       cursorChange = 12;
     }
-    else if(logOutBt.mouseOver())
+    else if(logOutBt.mouseOver() && logedIn)
     {
       logOutBt.highlight();
       cursorChange = 12;
@@ -38,7 +39,7 @@ class AccountMenue
     { mode = 0; }
     else if(loginBt.mouseOver())
     { createError("Currently not available!"); }
-    else if(logOutBt.mouseOver())
+    else if(logOutBt.mouseOver() && logedIn)
     { createError("Log in first!"); }
   }
 }

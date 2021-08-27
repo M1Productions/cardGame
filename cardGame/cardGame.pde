@@ -6,7 +6,7 @@ float volume = 75;
 
 int mode=0, cursorChange, fade=0, musicCount=0;
 String errorText = "";
-boolean play=false;
+boolean play=false, logedIn=false;
 PImage accountImg, cardBackImg, dumpingGroundImg, shieldImg, bombImg, mutedImg, silentImg, normalImg, loudImg, maxImg;
 
 LoadingScreen loadingScreen;

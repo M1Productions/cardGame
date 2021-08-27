@@ -1,6 +1,7 @@
 class Player
 {
   int nr, energy;
+  ArrayList <Card> hand = new ArrayList <Card>();
 
   Player(int nr, int energy)
   {
@@ -12,4 +13,7 @@ class Player
   { this.energy = energy; }
   int getEnergy()
   { return this.energy; }
+  
+  void giveCard(Card c)
+  { this.hand.add(c); }
 }

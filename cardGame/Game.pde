@@ -3,6 +3,8 @@ class Game
   int round;
   Button menueBt;
   ImageButton deckIBt, dumpingGroundIBt;
+  
+  ArrayList <Card> deck = new ArrayList <Card>();
 
   Game()
   {
@@ -11,6 +13,7 @@ class Game
     player2.setEnergy(0);
     
     menueBt = new Button(0, 0, width/30, height/20, #1025FF, "<-", 0);
+    
     deckIBt = new ImageButton(0, height/3-height/12, width/20, height/6, cardBackImg);
     dumpingGroundIBt = new ImageButton(width-width/10, height/3-height/30, width/10, height/15, dumpingGroundImg);
   }
@@ -18,25 +21,24 @@ class Game
   void draw()
   {
     stroke(50);
-    strokeWeight(height/60);
+    strokeWeight(height/120);
     estetics.dashline(0, height/3, width, height/3, 7, 7);
     
     menueBt.draw();
+    deckIBt.draw();
+    dumpingGroundIBt.draw();
+    
     if(menueBt.mouseOver())
     {
       menueBt.highlight();
       cursorChange = 12;
     }
-
-    deckIBt.draw();
-    if(deckIBt.mouseOver())
+    else if(deckIBt.mouseOver())
     {
       deckIBt.highlight();
       cursorChange = 12;
     }
-
-    dumpingGroundIBt.draw();
-    if(dumpingGroundIBt.mouseOver())
+    else if(dumpingGroundIBt.mouseOver())
     { cursorChange = 1; }
     
     this.drawEnergyBar();
@@ -46,6 +48,13 @@ class Game
   {
     if(menueBt.mouseOver())
     { mode = 0; }
+    else if(deckIBt.mouseOver())
+    { this.giveRandomCard(player1); }
+  }
+  
+  void giveRandomCard(Player p)
+  {
+    p.giveCard(this.deck.get(int(random(0,this.deck.length()))));
   }
   
   void drawEnergyBar() //todo

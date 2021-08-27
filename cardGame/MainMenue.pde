@@ -5,9 +5,10 @@ class MainMenue
 
   MainMenue()
   {
-    playBt = new Button(width/2-width/10, height/3, width/5, height/10, #1025FF, "PLAY", 0);
-    settingsBt = new Button(width/2-width/10, height/3*2, width/5, height/10, #1025FF, "Settings", 0);
     accountIBt = new ImageButton(width/2-width/10, 0, width/5, width/5, accountImg);
+    
+    playBt = new Button(width/2-width/10, height/2, width/5, height/10, #1025FF, "PLAY", 0);
+    settingsBt = new Button(width/2-width/10, height/2+height/5, width/5, height/10, #1025FF, "Settings", 0);
 
     createError("Account logged out");
   }
