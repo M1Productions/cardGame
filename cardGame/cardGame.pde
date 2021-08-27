@@ -1,7 +1,5 @@
 import processing.sound.*;
 
-//Mika war hier
-
 SoundFile mainTheme;
 String audioName = "data/titleSong.mp3";
 
@@ -25,6 +23,7 @@ void setup()
   size(1600,1000);
 
   mainTheme = new SoundFile(this, sketchPath(audioName)); //playing the theme song (Thanks to Tiara!!)
+  mainTheme.amp(0.1);
   mainTheme.play();
 
   bombImg = loadImage("bomb.png");
