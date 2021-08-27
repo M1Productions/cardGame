@@ -56,4 +56,7 @@ class ImageButton extends Button
 
   void draw()
   { image(this.image, this.x, this.y, this.w, this.h); }
+  
+  void changeImage(PImage img)
+  { this.image = img; }
 }
