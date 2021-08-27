@@ -4,9 +4,10 @@ class Card
   int atk, dfp, cost;
   color col;
   boolean fwd = true;
+  String name = "";
   //String[] properties; //todo give every card properties like  Bündnis mit Tiaratanist
 
-  Card(int x, int y, int w, int h, int atk, int dfp, int cost)
+  Card(int x, int y, int w, int h, int atk, int dfp, int cost, String name)
   {
     this.x = x;
     this.y = y;
@@ -15,6 +16,7 @@ class Card
     this.atk = atk;
     this.dfp = dfp;
     this.cost = cost;
+    this.name = name;
 
     if(this.cost == 10)
     { this.col = #FFC230; }
@@ -24,7 +26,7 @@ class Card
 
   void draw()
   {
-    if(this.fwd) //can't we just make e pfoto for every card??
+    if(this.fwd) //todo draw the text on the card
     {
       strokeWeight(this.w/10);
       stroke(255);
@@ -36,5 +38,11 @@ class Card
     }
     else
     { image(cardBackImg, this.x, this.y, this.w, this.h); }
+  }
+  
+  void setPosition(int x, int y)
+  {
+    this.x = x;
+    this.y = y;
   }
 }

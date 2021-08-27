@@ -14,8 +14,10 @@ class Game
     
     menueBt = new Button(0, 0, width/30, height/20, #1025FF, "<-", 0);
     
-    deckIBt = new ImageButton(0, height/3-height/12, width/20, height/6, cardBackImg);
+    deckIBt = new ImageButton(0, height/3-height/14, width/20, height/7, cardBackImg);
     dumpingGroundIBt = new ImageButton(width-width/10, height/3-height/30, width/10, height/15, dumpingGroundImg);
+    
+    this.deck.add(new Card( 0, height/3-height/14, width/20, height/7, 5, 6, 10, "Tiara"));
   }
 
   void draw()
@@ -39,9 +41,11 @@ class Game
       cursorChange = 12;
     }
     else if(dumpingGroundIBt.mouseOver())
-    { cursorChange = 1; }
+    { cursorChange = 0; }
     
     this.drawEnergyBar();
+    
+    player1.drawHand();
   }
 
   void mousePressed()
@@ -54,7 +58,7 @@ class Game
   
   void giveRandomCard(Player p)
   {
-    p.giveCard(this.deck.get(int(random(0,this.deck.length()))));
+    p.giveCard(this.deck.get(int(random(0,this.deck.size()-1))));
   }
   
   void drawEnergyBar() //todo
