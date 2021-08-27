@@ -1,4 +1,9 @@
-int mode=0, cursorChange, fade=0;
+import processing.sound.*;
+
+SoundFile mainTheme;
+String audioName = "data/titleSong.mp3";
+
+int mode=0, cursorChange, fade=0, musicCount=0;
 String errorText = "";
 boolean play=false;
 PImage accountImg, cardBackImg, dumpingGroundImg, shieldImg, bombImg;
@@ -8,10 +13,17 @@ MainMenue mainMenue;
 Game game;
 Settings settings;
 AccountMenue accountMenue;
+Estetics estetics;
+
+Player player1, player2;
 
 void setup()
 {
+  frameRate(30);
   size(1600,1000);
+
+  mainTheme = new SoundFile(this, sketchPath(audioName)); //playing the theme song (Thanks to Tiara!!)
+  mainTheme.play();
 
   bombImg = loadImage("bomb.png");
   shieldImg = loadImage("shield.png");
@@ -21,13 +33,13 @@ void setup()
 
   loadingScreen = new LoadingScreen();
   mainMenue = new MainMenue();
-  game = new Game();
   settings = new Settings();
   accountMenue = new AccountMenue();
+  estetics = new Estetics();
 }
 
 void draw()
-{
+{  
   if(play)
   {play();}
 
@@ -44,6 +56,10 @@ void draw()
 
   if(fade > 0)
   { printError(); }
+  
+  musicCount++;
+  if(musicCount%1845 == 0)
+  { mainTheme.play(); }
 
   cursor(cursorChange);
 }
@@ -61,8 +77,11 @@ void mousePressed()
 
 void play()
 {
-  mode=1;
   play = false;
+  mode=1;
+  player1 = new Player(1,1); //you
+  player2 = new Player(2,1); //your opponent
+  game = new Game();
   createError("No game found"); //todo game mecanics
 }
 void openSettings()

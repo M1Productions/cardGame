@@ -4,7 +4,7 @@ class Card
   int atk, dfp, cost;
   color col;
   boolean fwd = true;
-  //String[] properties; //todo give every card properties like ...ist nicht effektiv
+  //String[] properties; //todo give every card properties like  Bündnis mit Tiaratanist
 
   Card(int x, int y, int w, int h, int atk, int dfp, int cost)
   {
@@ -17,7 +17,7 @@ class Card
     this.cost = cost;
 
     if(this.cost == 10)
-    { this.col = #D8B06B; }
+    { this.col = #FFC230; }
     else
     { this.col = #975F62; }
   }
