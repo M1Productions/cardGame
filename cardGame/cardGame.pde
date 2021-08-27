@@ -2,11 +2,12 @@ import processing.sound.*;
 
 SoundFile mainTheme;
 String audioName = "data/titleSong.mp3";
+float volume = 75;
 
 int mode=0, cursorChange, fade=0, musicCount=0;
 String errorText = "";
 boolean play=false;
-PImage accountImg, cardBackImg, dumpingGroundImg, shieldImg, bombImg;
+PImage accountImg, cardBackImg, dumpingGroundImg, shieldImg, bombImg, mutedImg, silentImg, normalImg, loudImg, maxImg;
 
 LoadingScreen loadingScreen;
 MainMenue mainMenue;
@@ -23,7 +24,7 @@ void setup()
   size(1600,1000);
 
   mainTheme = new SoundFile(this, sketchPath(audioName)); //playing the theme song (Thanks to Tiara!!)
-  mainTheme.amp(0.1);
+  mainTheme.amp(volume/100);
   mainTheme.play();
 
   bombImg = loadImage("bomb.png");
@@ -31,6 +32,14 @@ void setup()
   accountImg = loadImage("noAccount.png");
   cardBackImg = loadImage("cardBack.png");
   dumpingGroundImg = loadImage("dumpingGround.png");
+  
+  //Musik-Lautstärke - Bilder
+  
+  mutedImg = loadImage("muted.png");
+  silentImg = loadImage("silent.png");
+  normalImg = loadImage("normal.png");
+  loudImg = loadImage("loud.png");
+  maxImg = loadImage("max.png");
 
   loadingScreen = new LoadingScreen();
   mainMenue = new MainMenue();
@@ -102,13 +111,13 @@ void createError(String text)
   { errorText += "\n"+text; }
   else
   { errorText = text; }
-  fade = 255;
+  fade = 300;
 }
 void printError()
 {
-  fill(#FF0000 , fade+55);
+  fill(#FF0000 , fade);
   textSize(height/20);
   textAlign(CENTER);
   text(errorText, width/2, height/2);
-  fade --;
+  fade-=2;
 }
