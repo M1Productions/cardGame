@@ -28,6 +28,23 @@ class Player
   void giveCard(Card c)
   {
     this.hand.add(c);
+    this.spaceOutCards();
+  }
+  void playCard()
+  {
+    for(int i=this.hand.size()-1; i>=0; i--) //going backwoards because then the cards displayed on top of all other cards are chosen first
+    {
+      if(this.hand.get(i).mouseOver())
+      {
+        game.playCard(this.hand.get(i), this);
+        this.hand.remove(i);
+        break;
+      }
+    }
+  }
+  
+  void spaceOutCards()
+  {
     Card cd;
     for(int i=0; i<this.hand.size();i++)
     {

@@ -3,12 +3,10 @@ class Settings
   Button menueBt;
   ImageButton soundIBt;
   
-  FileManager fM = new FileManager();
-  
   Settings()
   {
-    menueBt = new Button(width/2-width/60, 0, width/30, height/20, #1025FF, "<-", 0);
-    soundIBt = new ImageButton(0, 0, 100, 100, loudImg);
+    menueBt = new Button(0, 0, width/30, height/20, #1025FF, "<-", 0);
+    soundIBt = new ImageButton(width/2-height/10, height/2-height/10, height/10, height/10, loudImg);
   }
   
   void draw()
@@ -26,7 +24,11 @@ class Settings
   void mousePressed()
   {
     if(menueBt.mouseOver())
-    { mode = 0; fM.addLine("volume="+str(volume)); fM.save();}
+    {
+      mode = 0;
+      fM.addLine("volume="+str(volume));
+      fM.save();
+    }
     else if (soundIBt.mouseOver())
     {
        if (volume == 0)

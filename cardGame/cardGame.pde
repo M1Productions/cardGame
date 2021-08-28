@@ -7,6 +7,8 @@ SoundFile mainTheme;
 String audioName = "data/titleSong.mp3";
 float volume = 75;
 
+FileManager fM = new FileManager();
+
 int mode=0, cursorChange, fade=0, musicCount=0;
 String errorText = "";
 boolean play=false, logedIn=false;
@@ -36,8 +38,7 @@ void setup()
   cardBackImg = loadImage("cardBack.png");
   dumpingGroundImg = loadImage("dumpingGround.png");
   
-  //Musik-Lautstärke - Bilder
-  
+  //music loudness
   mutedImg = loadImage("muted.png");
   silentImg = loadImage("silent.png");
   normalImg = loadImage("normal.png");
@@ -52,7 +53,7 @@ void setup()
 }
 
 void draw()
-{  
+{
   if(play)
   {play();}
 
@@ -71,7 +72,7 @@ void draw()
   { printError(); }
   
   musicCount++;
-  if(musicCount%1845 == 0)
+  if(musicCount%1500 == 0)
   { mainTheme.play(); }
 
   cursor(cursorChange);
@@ -99,7 +100,6 @@ void play()
 }
 void openSettings()
 {
-  //todo save and load settings
   mode = 2;
 }
 void openAccountMenue()
@@ -120,7 +120,7 @@ void printError()
 {
   fill(#FF0000 , fade);
   textSize(height/20);
-  textAlign(CENTER);
+  textAlign(CENTER, BOTTOM);
   text(errorText, width/2, height/2);
   fade-=2;
 }

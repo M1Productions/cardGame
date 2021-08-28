@@ -1,15 +1,14 @@
 class FileManager
 {
-  ArrayList<String> txt;
+  ArrayList<String> txt = new ArrayList<String>();
   
   FileManager()
-  {
-    txt = new ArrayList<String>();
-  }
+  {}
   
   void addLine(String line)
   {
     txt.add(line);
+    println("1");
   }
   
   void save()
@@ -23,5 +22,10 @@ class FileManager
     
     file.flush();
     file.close();
+  }
+  
+  void load()
+  {
+    //todo
   }
 }

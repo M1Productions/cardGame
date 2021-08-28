@@ -7,16 +7,17 @@ class Card
   String name = "";
   //String[] properties; //todo give every card properties like  Bündnis mit Tiaratanist
 
-  Card(int x, int y, int w, int h, int atk, int dfp, int cost, String name)
+  Card(int x, int y, int h, int atk, int dfp, int cost, String name)
   {
     this.x = x;
     this.y = y;
-    this.w = w;
     this.h = h;
     this.atk = atk;
     this.dfp = dfp;
     this.cost = cost;
     this.name = name;
+    
+    this.w = int(this.h/1.5);
 
     if(this.cost == 10)
     { this.col = #FFC230; }
@@ -33,8 +34,20 @@ class Card
       fill(this.col);
       rect(this.x, this.y, this.w, this.h);
       
-      image(bombImg, this.x, this.y+this.h/2, this.w/5, this.w/5);
-      image(shieldImg, this.x+this.w/5*4, this.y+this.h/2, this.w/5, this.w/5);
+      image(bombImg, this.x+this.w/20, this.y+this.h/2, this.w/5, this.w/5);
+      image(shieldImg, this.x+this.w/20*19, this.y+this.h/2, this.w/5, this.w/5);
+      
+      noFill();
+      stroke(0);
+      strokeWeight(this.w/60);
+      circle(this.x+this.w/2, this.y+this.h/8, this.h/8);
+      
+      fill(0);
+      textAlign(CENTER);
+      textSize(this.h/12);
+      text(str(this.atk), this.x+this.w/10, this.y+this.h/5*3);
+      text(str(this.dfp), this.x+this.w/15*14, this.y+this.h/5*3);
+      text(str(this.cost), this.x+this.w/2, this.y+this.h/7);
     }
     else
     { image(cardBackImg, this.x, this.y, this.w, this.h); }
@@ -45,4 +58,7 @@ class Card
     this.x = x;
     this.y = y;
   }
+  
+  Boolean mouseOver()
+  { return this.x<=mouseX && mouseX<=this.x+this.w && this.y<=mouseY && mouseY<=this.y+this.h; }
 }
