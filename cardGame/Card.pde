@@ -59,6 +59,12 @@ class Card
     this.y = y;
   }
   
+  void changeSize(int h)
+  {
+    this.h = h;
+    this.w = int(this.h/1.5);
+  }
+  
   Boolean mouseOver()
   { return this.x<=mouseX && mouseX<=this.x+this.w && this.y<=mouseY && mouseY<=this.y+this.h; }
 }

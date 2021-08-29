@@ -13,10 +13,8 @@ class Player
   {
     if(this.hand.size() > 0)
     {
-      int i=0;
       for(Card c : this.hand)
-      { c.draw(); i++;}
-      //println(i);
+      { c.draw();}
     }
   }
   
@@ -27,6 +25,7 @@ class Player
   
   void giveCard(Card c)
   {
+    c.changeSize(height/5);
     this.hand.add(c);
     this.spaceOutCards();
   }

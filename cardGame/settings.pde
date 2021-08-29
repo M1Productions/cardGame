@@ -1,29 +1,49 @@
 class Settings
 {
-  Button menueBt;
+  Button menueBt, credsBt;
   ImageButton soundIBt;
+  
+  String creds = "Spiel: \n Caro \n\n Musik: \n Tiara \n\n Programm: \n Mika, Vale";
+  
+  boolean drawCreds=false;
   
   Settings()
   {
+    credsBt = new Button(width/2-width/18, height-height/5, width/9, height/10,#1025FF, "Credits", 0);
     menueBt = new Button(0, 0, width/30, height/20, #1025FF, "<-", 0);
-    soundIBt = new ImageButton(width/2-height/10, height/2-height/10, height/10, height/10, loudImg);
+    soundIBt = new ImageButton(width/2-height/20, height/2-height/10, height/10, height/10, loudImg);
   }
   
   void draw()
   {
     menueBt.draw();
-    if(menueBt.mouseOver())
+    soundIBt.draw();
+    credsBt.draw();
+    
+    if(this.drawCreds)
+    { this.drawCreds(); }
+    else if(menueBt.mouseOver())
     {
       menueBt.highlight();
       cursorChange = 12;
     }
-    
-    soundIBt.draw();
+    else if(soundIBt.mouseOver())
+    {
+      soundIBt.highlight();
+      cursorChange = 12;
+    }
+    else if(credsBt.mouseOver())
+    {
+      credsBt.highlight();
+      cursorChange = 12;
+    }
   }
   
   void mousePressed()
   {
-    if(menueBt.mouseOver())
+    if(this.drawCreds)
+    { this.drawCreds = false; }
+    else if(menueBt.mouseOver())
     {
       mode = 0;
       fM.txt.clear();
@@ -37,6 +57,10 @@ class Settings
       this.changeImages();
        
       mainTheme.amp(volume/100); 
+    }
+    else if(credsBt.mouseOver())
+    {
+      this.drawCreds = true;
     }
   }
   
@@ -52,5 +76,17 @@ class Settings
     { soundIBt.changeImage(loudImg); }
     else if (volume == 100)
     { soundIBt.changeImage(maxImg); }
+  }
+  
+  void drawCreds()
+  {
+    strokeWeight(0);
+    fill(0, 200);
+    rect(0,0,width,height);
+    
+    fill(255);
+    textSize(height/15);
+    textAlign(CENTER, TOP);
+    text(this.creds, width/2, 0);
   }
 }

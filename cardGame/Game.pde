@@ -76,6 +76,7 @@ class Game
     { c.setPosition(width/2, height/2); }
     else
     { c.setPosition(width/2, height/3); }
+    c.changeSize(height/7);
     this.table.add(c);
   }
   

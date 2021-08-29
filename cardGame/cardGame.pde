@@ -4,7 +4,6 @@ import java.io.*;
 import java.util.*;
 
 SoundFile mainTheme;
-String audioName = "data/titleSong.mp3";
 float volume = 75;
 
 FileManager fM = new FileManager();
@@ -28,7 +27,7 @@ void setup()
   frameRate(30);
   size(1600,1000);
 
-  mainTheme = new SoundFile(this, sketchPath(audioName)); //playing the theme song (Thanks to Tiara!!)
+  mainTheme = new SoundFile(this, sketchPath("data/titleSong.mp3")); //playing the theme song (Thanks to Tiara!!)
   mainTheme.amp(volume/100);
   mainTheme.play();
   

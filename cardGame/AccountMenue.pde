@@ -4,7 +4,7 @@ class AccountMenue
   
   AccountMenue()
   {
-    menueBt = new Button(width/2-width/60, 0, width/30, height/20, #1025FF, "<-", 0);
+    menueBt = new Button(0, 0, width/30, height/20, #1025FF, "<-", 0);
     loginBt = new Button(width/2-width/10, height/2, width/5, height/10, #1025FF, "Login", 0);
     logOutBt = new Button(width/2-width/10, height/2+height/5, width/5, height/10, #1025FF, "Logout", 0);
   }
