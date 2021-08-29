@@ -31,6 +31,8 @@ void setup()
   mainTheme = new SoundFile(this, sketchPath(audioName)); //playing the theme song (Thanks to Tiara!!)
   mainTheme.amp(volume/100);
   mainTheme.play();
+  
+  fM.load();
 
   bombImg = loadImage("bomb.png");
   shieldImg = loadImage("shield.png");
@@ -72,7 +74,7 @@ void draw()
   { printError(); }
   
   musicCount++;
-  if(musicCount%1500 == 0)
+  if(musicCount%1600 == 0)
   { mainTheme.play(); }
 
   cursor(cursorChange);
@@ -101,6 +103,7 @@ void play()
 void openSettings()
 {
   mode = 2;
+  settings.changeImages();
 }
 void openAccountMenue()
 {

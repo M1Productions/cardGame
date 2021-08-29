@@ -1,14 +1,11 @@
 class FileManager
 {
   ArrayList<String> txt = new ArrayList<String>();
+  ArrayList <String> content = new ArrayList <String>();
   
   FileManager()
-  {}
-  
-  void addLine(String line)
   {
-    txt.add(line);
-    println("1");
+    txt.add("volume=75.0");
   }
   
   void save()
@@ -16,9 +13,7 @@ class FileManager
     PrintWriter file = createWriter("settings.txt");
     
     for (String l : txt)
-    {
-      file.println(l);
-    }
+    { file.println(l); }
     
     file.flush();
     file.close();
@@ -26,6 +21,24 @@ class FileManager
   
   void load()
   {
-    //todo
+    String directory = "settings.txt";
+    BufferedReader reader = createReader(directory); // Open the file from the createWriter()
+   
+    String line = null;
+    try
+    {
+      while ((line = reader.readLine()) != null)
+      { this.content.add(line); }
+    }
+    catch (IOException e)
+    { e.printStackTrace(); }
+    
+    this.readSettings();
+  }
+  
+  void readSettings()
+  {
+    volume = float(this.content.get(0));
+    mainTheme.amp(volume/100);
   }
 }
