@@ -3,7 +3,7 @@ class Settings
   Button menueBt, credsBt;
   ImageButton soundIBt;
   
-  String creds = "Spiel: \n Caro \n\n Musik: \n Tiara \n\n Programm: \n Mika, Vale";
+  String creds = "Spiel und Design: \n Karo \n\n Musik: \n Tiara \n\n Programm: \n Mika, Vale \n\n Eine Produktions von M1Productions";
   
   boolean drawCreds=false;
   
@@ -85,7 +85,7 @@ class Settings
     rect(0,0,width,height);
     
     fill(255);
-    textSize(height/15);
+    textSize(height/16);
     textAlign(CENTER, TOP);
     text(this.creds, width/2, 0);
   }
