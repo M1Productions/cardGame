@@ -1,10 +1,10 @@
 import processing.sound.*;
-import java.sql.*;
-import java.io.*;
-import java.util.*;
+//import java.sql.*;
+//import java.io.*;
+//import java.util.*;
 
-SoundFile mainTheme;
-float volume = 75;
+SoundFile mainThemeSnd, clickSnd, cardSnd;
+float musicVolume=100, sfxVolume=100;
 
 FileManager fM = new FileManager();
 
@@ -27,9 +27,13 @@ void setup()
   frameRate(30);
   size(1300,1000);
 
-  mainTheme = new SoundFile(this, sketchPath("data/titleSong.mp3")); //playing the theme song (Thanks to Tiara!!)
-  mainTheme.amp(volume/100);
-  mainTheme.loop();
+  cardSnd = new SoundFile(this, sketchPath("data/button.mp3"));
+  cardSnd.amp(sfxVolume/100);
+  clickSnd = new SoundFile(this, sketchPath("data/click.mp3"));
+  clickSnd.amp(sfxVolume/100);
+  mainThemeSnd = new SoundFile(this, sketchPath("data/titleSong.mp3")); //playing the theme song (Thanks to Tiara!!)
+  mainThemeSnd.amp(musicVolume/100);
+  mainThemeSnd.loop();
   
   fM.load();
 
@@ -81,6 +85,7 @@ void draw()
 
 void mousePressed()
 {
+  clickSnd.play();
   switch(mode)
   {
     case 0: mainMenue.mousePressed();       break;

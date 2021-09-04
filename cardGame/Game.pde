@@ -13,10 +13,10 @@ class Game
     player1.setEnergy(0);
     player2.setEnergy(0);
     
-    menueBt = new Button(0, 0, width/30, height/20, #1025FF, "<-", 0);
+    menueBt = new Button(width/2-width/60, 0, width/30, height/20, #1025FF, "<-", 0);
     
-    deckIBt = new ImageButton(0, height/3-height/14, int(height/10.5), height/7, cardBackImg);
-    dumpingGroundIBt = new ImageButton(width-width/10, height/3-height/30, height/7, int(height/10.5), dumpingGroundImg);
+    deckIBt = new ImageButton(width/33*25, height/60, width/4, height/4, cardBackImg);
+    dumpingGroundIBt = new ImageButton(width/33, height/60, width/4, height/4, dumpingGroundImg);
     
     this.deck.add(new Card( 0, height/3-height/14, height/7, 5, 6, 10, "Tiara"));
     this.deck.add(new Card( 0, height/3-height/14, height/7, 6, 6, 10, "David"));
@@ -28,7 +28,6 @@ class Game
     
     stroke(50);
     strokeWeight(height/200);
-    //estetics.dashline(0, height/3, width, height/3, 7, 7);
     
     menueBt.draw();
     deckIBt.draw();
@@ -58,9 +57,12 @@ class Game
   void mousePressed()
   {
     if(menueBt.mouseOver())
-    { changeMode = 0; }
+    { changeMode = 0;}
     else if(deckIBt.mouseOver() && this.deck.size() > 0)
-    { this.giveRandomCard(player1); }
+    {
+      this.giveRandomCard(player1);
+      cardSnd.play();
+    }
     else
     { player1.playCard(); }
   }

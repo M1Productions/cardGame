@@ -57,12 +57,12 @@ class Settings
     {
       changeMode = 0;
       fM.txt.clear();
-      fM.txt.add(str(volume));
+      fM.txt.add(str(musicVolume));
       fM.save();
     }
     else if (soundIBt.mouseOver())
     {
-      volume = (volume+25-(volume%25))%100;       
+      musicVolume = (musicVolume+25-(musicVolume%25))%100;       
       this.changeVolume();
     }
     else if(credsBt.mouseOver())
@@ -72,7 +72,7 @@ class Settings
     else if(this.volumeSl.mouseOver())
     {
       this.volumeSl.mousePressed();
-      volume = volumeSl.value;
+      musicVolume = volumeSl.value;
       this.changeVolume();
     }
   }
@@ -82,31 +82,31 @@ class Settings
     if(this.volumeSl.mouseOver())
     {
       this.volumeSl.mouseDragged();
-      volume = volumeSl.value+1;
+      musicVolume = volumeSl.value+1;
       this.changeVolume();
     }
   }
   
   void changeImages()
   {
-    if (volume >= 100)
+    if (musicVolume >= 100)
     { soundIBt.changeImage(maxImg); }
-    else if (volume >= 75)
+    else if (musicVolume >= 75)
     { soundIBt.changeImage(loudImg); }
-    else if (volume >= 50)
+    else if (musicVolume >= 50)
     { soundIBt.changeImage(normalImg); }
-    else if (volume > 0)
+    else if (musicVolume > 0)
     { soundIBt.changeImage(silentImg); }
-    else if (volume <= 0)
+    else if (musicVolume <= 0)
     { soundIBt.changeImage(mutedImg); }
     
-    this.volumeSl.setSlider(int(volume));
+    this.volumeSl.setSlider(int(musicVolume));
   }
   
   void changeVolume()
   {
     this.changeImages();
-    mainTheme.amp(volume/100); 
+    mainThemeSnd.amp(musicVolume/100); 
   }
   
   void drawCreds()

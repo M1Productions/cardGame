@@ -37,6 +37,7 @@ class Player
       {
         game.playCard(this.hand.get(i), this);
         this.hand.remove(i);
+        cardSnd.play();
         break;
       }
     }

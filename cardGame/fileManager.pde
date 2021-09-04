@@ -38,7 +38,7 @@ class FileManager
   
   void readSettings()
   {
-    volume = float(this.content.get(0));
-    mainTheme.amp(volume/100);
+    musicVolume = float(this.content.get(0));
+    mainThemeSnd.amp(musicVolume/100);
   }
 }
