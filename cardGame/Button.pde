@@ -35,7 +35,7 @@ class Button
 
   void highlight()
   {
-    strokeWeight(0);
+    noStroke();
     fill(100,100);
     rect(this.x, this.y, this.w, this.h);
   }

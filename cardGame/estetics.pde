@@ -1,6 +1,6 @@
 class Estetics
 {
-  void dashline(int x0, int y0, int x1, int y1, int line, int space )
+  /*void dashline(int x0, int y0, int x1, int y1, int line, int space )
   {
     float [] spacing = {line, space};
     float distance = dist(x0, y0, x1, y1);
@@ -33,5 +33,24 @@ class Estetics
         drawLine = !drawLine;  // switch between dash and gap
       }
     }
+  }*/
+  
+  color getBasicPrimaryColor()
+  {
+    if(team.equals("cake"))
+    { return #DAC6BF; }
+    else if(team.equals("music"))
+    { return #57897E; }
+    else
+    { return #845B55; }
+  }
+  color getBasicSecondaryColor()
+  {
+    if(team.equals("cake"))
+    { return #E59890; }
+    if(team.equals("music"))
+    { return #769D88; }
+    else
+    { return #F8EEE5; }
   }
 }

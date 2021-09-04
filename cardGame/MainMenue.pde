@@ -50,17 +50,17 @@ class MainMenue
     if(this.playIBt.mouseOver())
     {
       loadingScreen.draw();
-      play = true;
+      changeMode = 1;
     }
     else if(this.settingsIBt.mouseOver())
     {
       loadingScreen.draw();
-      openSettings();
+      changeMode = 2;
     }
     else if(this.accountIBt.mouseOver())
     {
       loadingScreen.draw();
-      openAccountMenue();
+      changeMode = 3;
     }
     else if(this.quitBt.mouseOver())
     { exit(); }

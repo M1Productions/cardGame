@@ -3,7 +3,7 @@ class LoadingScreen
   void draw()
   {
     fill(200);
-    strokeWeight(0);
+    noStroke();
     rect(0,0,width,height);
 
     fill(0);

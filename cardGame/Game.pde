@@ -28,7 +28,7 @@ class Game
     
     stroke(50);
     strokeWeight(height/200);
-    estetics.dashline(0, height/3, width, height/3, 7, 7);
+    //estetics.dashline(0, height/3, width, height/3, 7, 7);
     
     menueBt.draw();
     deckIBt.draw();
@@ -58,7 +58,7 @@ class Game
   void mousePressed()
   {
     if(menueBt.mouseOver())
-    { mode = 0; }
+    { changeMode = 0; }
     else if(deckIBt.mouseOver() && this.deck.size() > 0)
     { this.giveRandomCard(player1); }
     else

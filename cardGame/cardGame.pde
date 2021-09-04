@@ -8,9 +8,9 @@ float volume = 75;
 
 FileManager fM = new FileManager();
 
-int mode=0, cursorChange, fade=0, musicCount=0;
-String errorText = "";
-boolean play=false, logedIn=false;
+int mode=0, cursorChange, fade=0, changeMode=0;
+String errorText = "", team=""; //team: music/cake
+boolean logedIn=false;
 PImage playButtonImg, cardFrontImg, settingsButtonImg, accountImg, cardBackImg, dumpingGroundImg, mutedImg, silentImg, normalImg, loudImg, maxImg, homeScreenImg, screenNeutralImg, screenMusicImg, tableMusicImg;
 
 LoadingScreen loadingScreen;
@@ -29,7 +29,7 @@ void setup()
 
   mainTheme = new SoundFile(this, sketchPath("data/titleSong.mp3")); //playing the theme song (Thanks to Tiara!!)
   mainTheme.amp(volume/100);
-  mainTheme.play();
+  mainTheme.loop();
   
   fM.load();
 
@@ -60,8 +60,8 @@ void setup()
 
 void draw()
 {
-  if(play)
-  {play();}
+  if(changeMode != mode) //before drawing because then the loading screen is drawn
+  { changeMode(); }
 
   cursorChange=0;
 
@@ -75,10 +75,6 @@ void draw()
 
   if(fade > 0)
   { printError(); }
-  
-  musicCount++;
-  if(musicCount%1600 == 0)
-  { mainTheme.play(); }
 
   cursor(cursorChange);
 }
@@ -94,24 +90,37 @@ void mousePressed()
   }
 }
 
-void play()
+void mouseDragged()
 {
-  play = false;
-  mode=1;
-  player1 = new Player(1,1); //you
-  player2 = new Player(2,1); //your opponent
-  game = new Game();
-  createError("No game found"); //todo game mecanics
+  switch(mode)
+  {
+    case 2: settings.mouseDragged();    break;
+  }
 }
-void openSettings()
+
+void changeMode()
 {
-  mode = 2;
-  settings.changeImages();
-}
-void openAccountMenue()
-{
-  //todo load account settings
-  mode = 3;
+  if(changeMode == 0)
+  {
+    mode = 0;
+  }
+  else if(changeMode == 1)
+  {
+    mode=1;
+    player1 = new Player(1,1); //you
+    player2 = new Player(2,1); //your opponent
+    game = new Game();
+    createError("No game found"); //todo game mecanics
+  }
+  else if(changeMode == 2)
+  {
+    mode = 2;
+    settings.refresh();
+  }
+  else if(changeMode == 3)
+  {
+    mode = 3;
+  }
 }
 
 void createError(String text)

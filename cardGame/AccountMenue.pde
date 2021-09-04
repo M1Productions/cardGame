@@ -38,7 +38,7 @@ class AccountMenue
   void mousePressed()
   {
     if(menueBt.mouseOver())
-    { mode = 0; }
+    { changeMode = 0; }
     else if(loginBt.mouseOver())
     { createError("Currently not available!"); }
     else if(logOutBt.mouseOver() && logedIn)
