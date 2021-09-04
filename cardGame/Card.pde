@@ -17,7 +17,7 @@ class Card
     this.cost = cost;
     this.name = name;
     
-    this.w = int(this.h/1.5);
+    this.w = int(this.h/1.4);
 
     if(this.cost == 10)
     { this.col = #FFC230; }
@@ -29,13 +29,7 @@ class Card
   {
     if(this.fwd) //todo draw the text on the card
     {
-      strokeWeight(this.w/10);
-      stroke(255);
-      fill(this.col);
-      rect(this.x, this.y, this.w, this.h);
-      
-      image(bombImg, this.x+this.w/20, this.y+this.h/2, this.w/5, this.w/5);
-      image(shieldImg, this.x+this.w/20*19, this.y+this.h/2, this.w/5, this.w/5);
+      image(cardFrontImg, this.x, this.y, this.w, this.h);
       
       noFill();
       stroke(0);

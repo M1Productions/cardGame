@@ -24,6 +24,8 @@ class Game
 
   void draw()
   {
+    background(tableMusicImg);
+    
     stroke(50);
     strokeWeight(height/200);
     estetics.dashline(0, height/3, width, height/3, 7, 7);

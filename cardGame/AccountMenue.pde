@@ -11,6 +11,8 @@ class AccountMenue
   
   void draw()
   {
+    background(screenNeutralImg);
+    
     menueBt.draw();    
     loginBt.draw();
     if(logedIn)

@@ -3,7 +3,7 @@ class Settings
   Button menueBt, credsBt;
   ImageButton soundIBt;
   
-  String creds = "Spiel und Design: \n Karo \n\n Musik: \n Tiara \n\n Programm: \n Mika, Vale \n\n Eine Produktions von M1Productions";
+  String creds = "Spiel und Design: \n Karo \n\n Musik: \n Tiara \n\n Programm: \n Mika, Vale \n\n Eine Produktion von M1Productions";
   
   boolean drawCreds=false;
   
@@ -16,6 +16,8 @@ class Settings
   
   void draw()
   {
+    background(screenMusicImg);
+    
     menueBt.draw();
     soundIBt.draw();
     credsBt.draw();

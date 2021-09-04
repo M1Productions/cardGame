@@ -11,7 +11,7 @@ FileManager fM = new FileManager();
 int mode=0, cursorChange, fade=0, musicCount=0;
 String errorText = "";
 boolean play=false, logedIn=false;
-PImage accountImg, cardBackImg, dumpingGroundImg, shieldImg, bombImg, mutedImg, silentImg, normalImg, loudImg, maxImg;
+PImage playButtonImg, cardFrontImg, settingsButtonImg, accountImg, cardBackImg, dumpingGroundImg, mutedImg, silentImg, normalImg, loudImg, maxImg, homeScreenImg, screenNeutralImg, screenMusicImg, tableMusicImg;
 
 LoadingScreen loadingScreen;
 MainMenue mainMenue;
@@ -25,7 +25,7 @@ Player player1, player2;
 void setup()
 {
   frameRate(30);
-  size(1600,1000);
+  size(1300,1000);
 
   mainTheme = new SoundFile(this, sketchPath("data/titleSong.mp3")); //playing the theme song (Thanks to Tiara!!)
   mainTheme.amp(volume/100);
@@ -33,11 +33,16 @@ void setup()
   
   fM.load();
 
-  bombImg = loadImage("bomb.png");
-  shieldImg = loadImage("shield.png");
+  cardFrontImg = loadImage("pCardNormalFront.png");
   accountImg = loadImage("noAccount.png");
   cardBackImg = loadImage("cardBack.png");
   dumpingGroundImg = loadImage("dumpingGround.png");
+  homeScreenImg = loadImage("homeScreen.png");
+  screenNeutralImg = loadImage("screenNeutral.png");
+  screenMusicImg = loadImage("screenMusic.png");
+  tableMusicImg = loadImage("tableMusic.png");
+  playButtonImg = loadImage("playButton.png");
+  settingsButtonImg = loadImage("settingsButton.png");
   
   //music loudness
   mutedImg = loadImage("muted.png");
@@ -59,7 +64,6 @@ void draw()
   {play();}
 
   cursorChange=0;
-  background(200);
 
   switch(mode)
   {
