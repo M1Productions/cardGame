@@ -1,28 +1,27 @@
 class FileManager
 {
-  ArrayList<String> txt = new ArrayList<String>();
-  ArrayList <String> content = new ArrayList <String>();
+  ArrayList<String> account = new ArrayList<String>(); //the account content
+  ArrayList<String> txt = new ArrayList<String>(); //the settings content
+  ArrayList <String> content = new ArrayList <String>(); //for reading a file
   
   FileManager()
-  {
-    txt.add("volume=75.0");
-  }
+  {}
   
-  void save()
+  void save(ArrayList <String> saveContent, String dir)
   {
-    PrintWriter file = createWriter("settings.txt");
+    PrintWriter file = createWriter(dir);
     
-    for (String l : txt)
+    for (String l : saveContent)
     { file.println(l); }
     
     file.flush();
     file.close();
   }
   
-  void load()
+  void load(String dir)
   {
-    String directory = "settings.txt";
-    BufferedReader reader = createReader(directory); // Open the file from the createWriter()
+    this.content.clear();
+    BufferedReader reader = createReader(dir); // Open the file from the createWriter()
    
     String line = null;
     try
@@ -32,13 +31,31 @@ class FileManager
     }
     catch (IOException e)
     { e.printStackTrace(); }
-    
-    this.readSettings();
   }
   
   void readSettings()
   {
-    musicVolume = float(this.content.get(0));
-    mainThemeSnd.amp(musicVolume/100);
+    data.musicVolume = float(this.content.get(0));
+    mainThemeSnd.amp(data.musicVolume/100);
+    data.sfxVolume = float(this.content.get(1));
+    cardSnd.amp(data.sfxVolume/100);
+    clickSnd.amp(data.sfxVolume/100);
+  }
+  void readAccount()
+  {
+    if(this.content == null || this.content.size() == 0)
+    {
+      data.logedIn = false;
+      createError("No Account found");
+      accountImg = loadImage("noAccount.png");
+    }
+    else
+    {
+      data.logedIn = true;
+      data.aName = this.content.get(0);
+      createError("Loged in as "+data.aName);
+      accountImg = loadImage("accountDefault.png");
+      data.team = this.content.get(1);
+    }
   }
 }

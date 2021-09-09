@@ -4,14 +4,13 @@ import processing.sound.*;
 //import java.util.*;
 
 SoundFile mainThemeSnd, clickSnd, cardSnd;
-float musicVolume=100, sfxVolume=100;
 
-FileManager fM = new FileManager();
+data data;
+FileManager fM;
 
 int mode=0, cursorChange, fade=0, changeMode=0;
-String errorText = "", team=""; //team: music/cake
-boolean logedIn=false;
-PImage playButtonImg, cardFrontImg, settingsButtonImg, accountImg, cardBackImg, dumpingGroundImg, mutedImg, silentImg, normalImg, loudImg, maxImg, homeScreenImg, screenNeutralImg, screenMusicImg, tableMusicImg;
+String errorText = "";
+PImage settingsButtonHoverImg, playButtonHoverImg, playButtonImg, cardFrontImg, settingsButtonImg, accountImg, cardBackImg, dumpingGroundImg, mutedImg, silentImg, normalImg, loudImg, maxImg, homeScreenImg, screenNeutralImg, screenMusicImg, tableMusicImg;
 
 LoadingScreen loadingScreen;
 MainMenue mainMenue;
@@ -26,19 +25,23 @@ void setup()
 {
   frameRate(30);
   size(1300,1000);
+  
+  loadingScreen = new LoadingScreen();
+  loadingScreen.draw();
+  
+  data = new data();
+  fM = new FileManager();
 
   cardSnd = new SoundFile(this, sketchPath("data/button.mp3"));
-  cardSnd.amp(sfxVolume/100);
   clickSnd = new SoundFile(this, sketchPath("data/click.mp3"));
-  clickSnd.amp(sfxVolume/100);
   mainThemeSnd = new SoundFile(this, sketchPath("data/titleSong.mp3")); //playing the theme song (Thanks to Tiara!!)
-  mainThemeSnd.amp(musicVolume/100);
   mainThemeSnd.loop();
   
-  fM.load();
+  data.load();
 
+  settingsButtonHoverImg = loadImage("settingsButtonHover.png");
+  playButtonHoverImg = loadImage("playButtonHover.png");
   cardFrontImg = loadImage("pCardNormalFront.png");
-  accountImg = loadImage("noAccount.png");
   cardBackImg = loadImage("cardBack.png");
   dumpingGroundImg = loadImage("dumpingGround.png");
   homeScreenImg = loadImage("homeScreen.png");
@@ -48,14 +51,13 @@ void setup()
   playButtonImg = loadImage("playButton.png");
   settingsButtonImg = loadImage("settingsButton.png");
   
-  //music loudness
+  //music volume
   mutedImg = loadImage("muted.png");
   silentImg = loadImage("silent.png");
   normalImg = loadImage("normal.png");
   loudImg = loadImage("loud.png");
   maxImg = loadImage("max.png");
 
-  loadingScreen = new LoadingScreen();
   mainMenue = new MainMenue();
   settings = new Settings();
   accountMenue = new AccountMenue();
@@ -108,6 +110,8 @@ void changeMode()
   if(changeMode == 0)
   {
     mode = 0;
+    data.loadAcc();
+    mainMenue.accountIBt = new ImageButton(width/2-width/16, 0, width/8, width/8, accountImg);
   }
   else if(changeMode == 1)
   {

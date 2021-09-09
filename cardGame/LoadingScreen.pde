@@ -2,11 +2,10 @@ class LoadingScreen
 {
   void draw()
   {
-    fill(200);
-    noStroke();
-    rect(0,0,width,height);
+    background(screenNeutralImg);
 
-    fill(0);
+    fill(255);
+    textSize(height/20);
     textAlign(CENTER,CENTER);
     text("loading...", width/2, height/2);
 

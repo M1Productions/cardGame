@@ -46,16 +46,30 @@ class Button
 
 class ImageButton extends Button
 {
-  PImage image;
+  PImage image, hover;
 
   ImageButton(int x, int y, int w, int h, PImage image)
   {
     super(x,y,w,h,0,"",0);
     this.image = image;
   }
+  ImageButton(int x, int y, int w, int h, PImage image, PImage hover)
+  {
+    super(x,y,w,h,0,"",0);
+    this.image = image;
+    this.hover = hover;
+  }
 
   void draw()
   { image(this.image, this.x, this.y, this.w, this.h); }
+  
+  void highlight()
+  {
+    if(this.hover == null)
+    { super.highlight(); }
+    else
+    { image(this.hover, this.x, this.y, this.w, this.h); }
+  }
   
   void changeImage(PImage img)
   { this.image = img; }

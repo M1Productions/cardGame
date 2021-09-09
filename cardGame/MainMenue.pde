@@ -8,10 +8,8 @@ class MainMenue
     quitBt = new Button(width-width/15-height/15/12, 0+height/15/12, width/15, height/15, #FF1A2A, "X", 0);
     
     accountIBt = new ImageButton(width/2-width/16, 0, width/8, width/8, accountImg);
-    playIBt = new ImageButton(width/2-181, 220, 357, 363, playButtonImg);
-    settingsIBt = new ImageButton(width/2-125, 588, 239, 210, settingsButtonImg);
-
-    createError("Account logged out");
+    playIBt = new ImageButton(width/2-181, 220, 357, 363, playButtonImg, playButtonHoverImg);
+    settingsIBt = new ImageButton(width/2-125, 588, 239, 210, settingsButtonImg, settingsButtonHoverImg);
   }
 
   void draw()

@@ -13,22 +13,23 @@ class AccountMenue
   {
     background(screenNeutralImg);
     
-    menueBt.draw();    
-    loginBt.draw();
-    if(logedIn)
+    menueBt.draw();
+    if(data.logedIn)
     { logOutBt.draw(); }
+    else
+    { loginBt.draw(); }
     
     if(menueBt.mouseOver()) //if the mouse is over one of the buttons
     {
       menueBt.highlight();
       cursorChange = 12;
     }
-    else if(loginBt.mouseOver())
+    else if(loginBt.mouseOver() && data.logedIn == false)
     {
       loginBt.highlight();
       cursorChange = 12;
     }
-    else if(logOutBt.mouseOver() && logedIn)
+    else if(logOutBt.mouseOver() && data.logedIn)
     {
       logOutBt.highlight();
       cursorChange = 12;
@@ -38,10 +39,21 @@ class AccountMenue
   void mousePressed()
   {
     if(menueBt.mouseOver())
-    { changeMode = 0; }
-    else if(loginBt.mouseOver())
-    { createError("Currently not available!"); }
-    else if(logOutBt.mouseOver() && logedIn)
-    { createError("Log in first!"); }
+    {
+      changeMode = 0;
+    }
+    else if(loginBt.mouseOver() && data.logedIn == false)
+    {
+      fM.account.add("Test");
+      fM.account.add("music");
+      fM.save(fM.account, "settings/account.eck");
+      changeMode = 0;
+    }
+    else if(logOutBt.mouseOver() && data.logedIn)
+    {
+      fM.account.clear();
+      fM.save(fM.account, "settings/account.eck");
+      changeMode = 0;
+    }
   }
 }
