@@ -45,17 +45,14 @@ class FileManager
   {
     if(this.content == null || this.content.size() == 0)
     {
-      data.logedIn = false;
-      createError("No Account found");
+      data.team = "";
+      createError("No Team found");
       accountImg = loadImage("noAccount.png");
     }
     else
     {
-      data.logedIn = true;
-      data.aName = this.content.get(0);
-      createError("Loged in as "+data.aName);
+      data.team = this.content.get(0);
       accountImg = loadImage("accountDefault.png");
-      data.team = this.content.get(1);
     }
   }
 }

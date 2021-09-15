@@ -3,6 +3,7 @@ class Settings
   Button menueBt, credsBt;
   ImageButton soundIBt;
   Slider volumeSl;
+  PImage img;
   
   String creds = "Spiel und Design: \n Karo \n\n Musik: \n Tiara \n\n Programm: \n Mika, Vale \n\n Eine Produktion von M1Productions";
   
@@ -18,12 +19,13 @@ class Settings
   void refresh()
   {
     volumeSl = new Slider(width/6*2, height/2+height/10, width/6*3, 50, 25, 100, estetics.getBasicPrimaryColor(), estetics.getBasicSecondaryColor());
+    this.img = data.getBg();
     this.changeImages();
   }
   
   void draw()
   {
-    background(screenMusicImg);
+    background(this.img);
     
     menueBt.draw();
     soundIBt.draw();

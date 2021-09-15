@@ -1,37 +1,32 @@
 class AccountMenue
 {
-  Button menueBt, loginBt, logOutBt;
+  Button menueBt;
+  ImageButton cakeIBt, musicIBt;
+  PImage img;
   
   AccountMenue()
   {
     menueBt = new Button(0, 0, width/30, height/20, #1025FF, "<-", 0);
-    loginBt = new Button(width/2-width/10, height/2, width/5, height/10, #1025FF, "Login", 0);
-    logOutBt = new Button(width/2-width/10, height/2+height/5, width/5, height/10, #1025FF, "Logout", 0);
+    cakeIBt = new ImageButton(width/7*2, height/2, width/7, height/5, cakeImg);
+    musicIBt = new ImageButton(width/7*5, height/2, width/7, height/5, musicImg);
+  }
+  
+  void refresh()
+  {
+    this.img = data.getBg();
   }
   
   void draw()
   {
-    background(screenNeutralImg);
+    background(this.img);
     
     menueBt.draw();
-    if(data.logedIn)
-    { logOutBt.draw(); }
-    else
-    { loginBt.draw(); }
+    cakeIBt.draw();
+    musicIBt.draw();
     
     if(menueBt.mouseOver()) //if the mouse is over one of the buttons
     {
       menueBt.highlight();
-      cursorChange = 12;
-    }
-    else if(loginBt.mouseOver() && data.logedIn == false)
-    {
-      loginBt.highlight();
-      cursorChange = 12;
-    }
-    else if(logOutBt.mouseOver() && data.logedIn)
-    {
-      logOutBt.highlight();
       cursorChange = 12;
     }
   }
@@ -42,18 +37,9 @@ class AccountMenue
     {
       changeMode = 0;
     }
-    else if(loginBt.mouseOver() && data.logedIn == false)
+    else if(true)
     {
-      fM.account.add("Test");
-      fM.account.add("music");
-      fM.save(fM.account, "settings/account.eck");
-      changeMode = 0;
-    }
-    else if(logOutBt.mouseOver() && data.logedIn)
-    {
-      fM.account.clear();
-      fM.save(fM.account, "settings/account.eck");
-      changeMode = 0;
+      
     }
   }
 }

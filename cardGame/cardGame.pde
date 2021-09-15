@@ -10,7 +10,7 @@ FileManager fM;
 
 int mode=0, cursorChange, fade=0, changeMode=0;
 String errorText = "";
-PImage settingsButtonHoverImg, playButtonHoverImg, playButtonImg, cardFrontImg, settingsButtonImg, accountImg, cardBackImg, dumpingGroundImg, mutedImg, silentImg, normalImg, loudImg, maxImg, homeScreenImg, screenNeutralImg, screenMusicImg, tableMusicImg;
+PImage settingsButtonHoverImg, musicImg, cakeImg, screenCakeImg, screenCakeCleanImg, screenMusicCleanImg, playButtonHoverImg, playButtonImg, cardFrontImg, settingsButtonImg, accountImg, cardBackImg, dumpingGroundImg, mutedImg, silentImg, normalImg, loudImg, maxImg, homeScreenImg, screenNeutralImg, screenMusicImg, tableMusicImg;
 
 LoadingScreen loadingScreen;
 MainMenue mainMenue;
@@ -25,6 +25,8 @@ void setup()
 {
   frameRate(30);
   size(1300,1000);
+  
+  screenNeutralImg = loadImage("screenNeutral.png");
   
   loadingScreen = new LoadingScreen();
   loadingScreen.draw();
@@ -45,11 +47,15 @@ void setup()
   cardBackImg = loadImage("cardBack.png");
   dumpingGroundImg = loadImage("dumpingGround.png");
   homeScreenImg = loadImage("homeScreen.png");
-  screenNeutralImg = loadImage("screenNeutral.png");
   screenMusicImg = loadImage("screenMusic.png");
+  screenCakeImg = loadImage("screenCake.png");
+  screenMusicCleanImg = loadImage("screenMusicClean.png");
+  screenCakeCleanImg = loadImage("screenCakeClean.png");
   tableMusicImg = loadImage("tableMusic.png");
   playButtonImg = loadImage("playButton.png");
   settingsButtonImg = loadImage("settingsButton.png");
+  musicImg = loadImage("musicLogo.png");
+  cakeImg = loadImage("cakeLogo.png");
   
   //music volume
   mutedImg = loadImage("muted.png");
@@ -129,6 +135,7 @@ void changeMode()
   else if(changeMode == 3)
   {
     mode = 3;
+    accountMenue.refresh();
   }
 }
 

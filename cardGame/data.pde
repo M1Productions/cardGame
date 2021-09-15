@@ -2,7 +2,7 @@ class data //this class contains all information that is saved in a file
 {
   //a -> account
   //s -> setting
-  String aName="", team=""; //team: music/cake
+  String team=""; //team: music/cake
   float musicVolume=100, sfxVolume=100;
   boolean logedIn;
   
@@ -17,5 +17,15 @@ class data //this class contains all information that is saved in a file
   {
     fM.load("settings/account.eck");
     fM.readAccount();
+  }
+  
+  PImage getBg()
+  {
+    if(this.team.equals("music"))
+    { return screenMusicCleanImg; }
+    else if(this.team.equals("cake"))
+    { return screenCakeCleanImg; }
+    
+    return screenNeutralImg;
   }
 }
