@@ -30,6 +30,7 @@ class AccountMenue
     if(menueBt.mouseOver())
     {
       changeMode = 0;
+      data.saveAcc();
     }
     else if(cakeIBt.mouseOver())
     {

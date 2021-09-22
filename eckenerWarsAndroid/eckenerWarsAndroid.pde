@@ -1,12 +1,12 @@
 import processing.sound.*;
 
-//SoundFile mainThemeSnd, clickSnd, cardSnd;
+SoundFile mainThemeSnd, clickSnd, cardSnd;
 
 data data;
 FileManager fM;
 
 int mode=0, fade=0, changeMode=0;
-String errorText = "";
+String errorText = ""; //ERROR : 1=directory not Found
 PImage musicImg, cakeImg, accountDefaultImg, frameMusicImg, screenCakeImg, screenCakeCleanImg, screenMusicCleanImg, playButtonImg, cardFrontImg, settingsButtonImg, accountImg, cardBackImg, dumpingGroundImg, mutedImg, silentImg, normalImg, loudImg, maxImg, homeScreenImg, screenNeutralImg, screenMusicImg;
 
 LoadingScreen loadingScreen;
@@ -14,9 +14,9 @@ MainMenue mainMenue;
 Game game;
 Settings settings;
 AccountMenue accountMenue;
-Estetics estetics;
+InGameMenue iGM;
 
-Player player1, player2;
+Player player;
 
 void setup()
 {
@@ -65,7 +65,7 @@ void setup()
   mainMenue = new MainMenue();
   settings = new Settings();
   accountMenue = new AccountMenue();
-  estetics = new Estetics();
+  iGM = new InGameMenue();
 }
 
 void draw()
@@ -79,6 +79,7 @@ void draw()
     case 1: game.draw();            break;
     case 2: settings.draw();        break;
     case 3: accountMenue.draw();    break;
+    case 4: iGM.draw();             break;
   }
 
   if(fade > 0)
@@ -94,6 +95,7 @@ void mousePressed()
     case 1: game.mousePressed();            break;
     case 2: settings.mousePressed();        break;
     case 3: accountMenue.mousePressed();    break;
+    case 4: iGM.mousePressed();             break;
   }
 }
 
@@ -117,27 +119,34 @@ void changeMode()
 {
   if(changeMode == 0)
   {
-    mode = 0;
-    data.loadAcc();
-    mainMenue.accountIBt.image = accountImg;
+    mode = changeMode;
+    mainMenue.refresh();
   }
   else if(changeMode == 1)
   {
-    mode=1;
-    player1 = new Player(1,1); //you
-    player2 = new Player(2,1); //your opponent
+    mode = changeMode;
+    player = new Player(); //you
     game = new Game();
-    createError("No game found"); //todo game mecanics
   }
   else if(changeMode == 2)
   {
-    mode = 2;
+    mode = changeMode;
     settings.refresh();
   }
   else if(changeMode == 3)
   {
-    mode = 3;
+    mode = changeMode;
     accountMenue.refresh();
+  }
+  else if(changeMode == 4)
+  {
+    mode = changeMode;
+    iGM.refresh();
+  }
+  else
+  {
+    createError("ERROR : 1 ="+changeMode);
+    changeMode = mode;
   }
 }
 

@@ -7,9 +7,14 @@ class MainMenue
   {
     quitBt = new Button(width-width/15-height/15/12, 0+height/15/12, width/15, height/15, #FF1A2A, "X", 0);
     
-    accountIBt = new ImageButton(width/2-width/16, 0, height/6, height/6, accountImg);
+    accountIBt = new ImageButton(width/2-width/16, 0, height/6, height/6, data.getTeamImage());
     playIBt = new ImageButton(int(width/2.7), int(height/4.4), int(width/3.5), int(height/2.8), playButtonImg);
     settingsIBt = new ImageButton(int(width/2.5), int(height/1.7), int(width/5.3), height/6, settingsButtonImg);
+  }
+  
+  void refresh()
+  {
+    this.accountIBt.image = data.getTeamImage();
   }
 
   void draw()

@@ -18,7 +18,7 @@ class Settings
   
   void refresh()
   {
-    volumeSl = new Slider(width/6*2, height/2+height/10, width/6*3, 50, 25, 100, estetics.getBasicPrimaryColor(), estetics.getBasicSecondaryColor());
+    volumeSl = new Slider(width/6*2, height/2+height/10, width/6*3, 50, 25, 100, data.getBasicPrimaryColor(), data.getBasicSecondaryColor());
     this.img = data.getBg();
     this.changeImages();
   }
