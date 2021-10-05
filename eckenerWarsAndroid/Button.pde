@@ -33,6 +33,9 @@ class Button
     text(this.txt, this.centerX, this.centerY);
   }
 
+  void changeLabe(String label)
+  { this.txt = label; }
+
   Boolean mouseOver()
   { return this.x<=mouseX && mouseX<=this.x+this.w && this.y<=mouseY && mouseY<=this.y+this.h; }
 }

@@ -44,13 +44,22 @@ class data //this class contains all information that is saved in a file
     
     return accountDefaultImg;
   }
+  PImage getFrame()
+  {
+    if(this.team.equals("music"))
+    { return frameMusicImg; }
+    else if(this.team.equals("cake"))
+    { return frameCakeImg; }
+    
+    return accountDefaultImg;
+  }
   
   color getBasicPrimaryColor()
   {
     if(this.team.equals("cake"))
-    { return #DAC6BF; }
+    { return #E0735F; }
     else if(this.team.equals("music"))
-    { return #57897E; }
+    { return #699480; }
     else
     { return #845B55; }
   }
@@ -59,7 +68,7 @@ class data //this class contains all information that is saved in a file
     if(this.team.equals("cake"))
     { return #E59890; }
     else if(this.team.equals("music"))
-    { return #769D88; }
+    { return #84A48C; }
     else
     { return #F8EEE5; }
   }

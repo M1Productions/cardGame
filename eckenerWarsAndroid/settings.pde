@@ -11,13 +11,13 @@ class Settings
   
   Settings()
   {
-    credsBt = new Button(width/2-width/18, height-height/5, width/9, height/10,#1025FF, "Credits", 0);
-    menueBt = new Button(0, 0, width/30, height/20, #1025FF, "<-", 0);
     soundIBt = new ImageButton(width/6-height/20, height/2+height/20, height/10, height/10, loudImg);
   }
   
   void refresh()
   {
+    menueBt = new Button(width/2-width/30, height/18, width/15, height/20, data.getBasicPrimaryColor(), "Menu", 0);
+    credsBt = new Button(width/2-width/18, height-height/5, width/9, height/10, data.getBasicPrimaryColor(), "Credits", 0);
     volumeSl = new Slider(width/6*2, height/2+height/10, width/6*3, 50, 25, 100, data.getBasicPrimaryColor(), data.getBasicSecondaryColor());
     this.img = data.getBg();
     this.changeImages();

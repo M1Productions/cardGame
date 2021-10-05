@@ -2,7 +2,6 @@ class Card
 {
   int x, y, w, h;
   int atk, dfp, cost;
-  color col;
   boolean fwd = true;
   String name = "";
   //String[] properties; //todo give every card properties like  Bündnis mit Tiaratanist
@@ -18,11 +17,17 @@ class Card
     this.name = name;
     
     this.w = int(this.h/1.4);
-
-    if(this.cost == 10)
-    { this.col = #FFC230; }
-    else
-    { this.col = #975F62; }
+  }
+  Card(int atk, int dfp, int cost, String name)
+  {
+    this.x = 0;
+    this.y = 0;
+    this.h = 0;
+    this.w = 0;
+    this.atk = atk;
+    this.dfp = dfp;
+    this.cost = cost;
+    this.name = name;
   }
 
   void draw()

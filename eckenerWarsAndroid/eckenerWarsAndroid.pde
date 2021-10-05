@@ -5,9 +5,9 @@ SoundFile mainThemeSnd, clickSnd, cardSnd;
 data data;
 FileManager fM;
 
-int mode=0, fade=0, changeMode=0;
+int mode=5, fade=0, changeMode=5;
 String errorText = ""; //ERROR : 1=directory not Found
-PImage musicImg, cakeImg, accountDefaultImg, frameMusicImg, screenCakeImg, screenCakeCleanImg, screenMusicCleanImg, playButtonImg, cardFrontImg, settingsButtonImg, accountImg, cardBackImg, dumpingGroundImg, mutedImg, silentImg, normalImg, loudImg, maxImg, homeScreenImg, screenNeutralImg, screenMusicImg;
+PImage screenShot, musicImg, cakeImg, accountDefaultImg, frameMusicImg, frameCakeImg, screenCakeImg, screenCakeCleanImg, screenMusicCleanImg, playButtonImg, cardFrontImg, settingsButtonImg, accountImg, cardBackImg, dumpingGroundImg, mutedImg, silentImg, normalImg, loudImg, maxImg, homeScreenImg, screenNeutralImg, screenMusicImg;
 
 LoadingScreen loadingScreen;
 MainMenue mainMenue;
@@ -15,8 +15,7 @@ Game game;
 Settings settings;
 AccountMenue accountMenue;
 InGameMenue iGM;
-
-Player player;
+changeInfoOverlay cIO;
 
 void setup()
 {
@@ -27,20 +26,21 @@ void setup()
   screenNeutralImg = loadImage("screenNeutral.png");
   
   loadingScreen = new LoadingScreen();
-  loadingScreen.draw();
+  this.draw();
   
   accountDefaultImg = loadImage("accountDefault.png");
   
   data = new data();
   fM = new FileManager();
-
-  /*cardSnd = new SoundFile(this, sketchPath("button.mp3"));
-  clickSnd = new SoundFile(this, sketchPath("click.mp3"));
-  mainThemeSnd = new SoundFile(this, sketchPath("titleSong.mp3")); //playing the theme song (Thanks to Tiara!!)
-  mainThemeSnd.loop();*/
+  
+  cardSnd = new SoundFile(this, ("button.mp3"));
+  clickSnd = new SoundFile(this, ("click.mp3"));
+  mainThemeSnd = new SoundFile(this, ("titleSong.mp3")); //playing the theme song (Thanks to Tiara!!)
+  mainThemeSnd.loop();
   
   data.load();
 
+  frameCakeImg = loadImage("frameCake.png");
   frameMusicImg = loadImage("frameMusic.png");
   cardFrontImg = loadImage("pCardNormalFront.png");
   cardBackImg = loadImage("cardBack.png");
@@ -66,6 +66,10 @@ void setup()
   settings = new Settings();
   accountMenue = new AccountMenue();
   iGM = new InGameMenue();
+  cIO = new changeInfoOverlay();
+  
+  mode=0;
+  changeMode=0;
 }
 
 void draw()
@@ -80,6 +84,8 @@ void draw()
     case 2: settings.draw();        break;
     case 3: accountMenue.draw();    break;
     case 4: iGM.draw();             break;
+    case 5: loadingScreen.draw();   break;
+    case 6: cIO.draw();             break;
   }
 
   if(fade > 0)
@@ -88,7 +94,7 @@ void draw()
 
 void mousePressed()
 {
-  //clickSnd.play();
+  clickSnd.play();
   switch(mode)
   {
     case 0: mainMenue.mousePressed();       break;
@@ -96,6 +102,8 @@ void mousePressed()
     case 2: settings.mousePressed();        break;
     case 3: accountMenue.mousePressed();    break;
     case 4: iGM.mousePressed();             break;
+    
+    case 6: cIO.mousePressed();             break;
   }
 }
 
@@ -125,7 +133,6 @@ void changeMode()
   else if(changeMode == 1)
   {
     mode = changeMode;
-    player = new Player(); //you
     game = new Game();
   }
   else if(changeMode == 2)
@@ -142,6 +149,12 @@ void changeMode()
   {
     mode = changeMode;
     iGM.refresh();
+  }
+  else if(changeMode == 6)
+  {
+    mode = changeMode;
+    screenShot = get();
+    cIO.refresh();
   }
   else
   {
@@ -164,5 +177,18 @@ void printError()
   textSize(height/20);
   textAlign(CENTER, BOTTOM);
   text(errorText, width/2, height/2);
-  fade-=2;
+  fade -= 2;
+}
+
+void spreadOutCards(ArrayList <Card> cards, int x, int xMax, int y)
+{
+  if(cards.size()>0)
+  {
+    Card c;
+    for(int i=0; i<cards.size(); i++)
+    {
+      c = cards.get(i);
+      c.setPosition(x+((xMax-x)/(cards.size()+1))*(i+1), y);
+    }
+  }
 }
