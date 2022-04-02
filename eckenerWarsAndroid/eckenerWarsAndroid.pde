@@ -1,12 +1,15 @@
 import processing.sound.*;
 
+import java.io.File;
+import java.io.IOException;
+
 SoundFile mainThemeSnd, clickSnd, cardSnd;
 
 data data;
 FileManager fM;
 
 int mode=5, fade=0, changeMode=5;
-String errorText = ""; //ERROR : 1=directory not Found
+String errorText = ""; //ERROR : 1=directory not Found //ERROR : 2=action shouldn't be possible
 PImage screenShot, musicImg, cakeImg, accountDefaultImg, frameMusicImg, frameCakeImg, screenCakeImg, screenCakeCleanImg, screenMusicCleanImg, playButtonImg, cardFrontImg, settingsButtonImg, accountImg, cardBackImg, dumpingGroundImg, mutedImg, silentImg, normalImg, loudImg, maxImg, homeScreenImg, screenNeutralImg, screenMusicImg;
 
 LoadingScreen loadingScreen;
@@ -158,7 +161,7 @@ void changeMode()
   }
   else
   {
-    createError("ERROR : 1 ="+changeMode);
+    createError("ERROR : 1 : "+changeMode);
     changeMode = mode;
   }
 }

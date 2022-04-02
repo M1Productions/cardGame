@@ -1,9 +1,12 @@
 class Game
 {
-  int round, energy, lifes;
+  int round, energy, lifes, performAction;
   boolean drawReady=true;
   
-  Card zoomedCd;
+  PImage frame;
+  
+  Card zoomedCd = new Card(0, height/4, height/4*3, 0, 0, 0, "");
+  Card markedCd;
   
   Button menueBt, roundBt, editBt, moveBt, backBt;
   ImageButton deckIBt, dumpingGroundIBt;
@@ -15,6 +18,10 @@ class Game
 
   Game()
   {
+    this.zoomedCd.fwd = false;
+    
+    this.frame = data.getFrame();
+    
     this.round = 1;
     this.energy = 1;
     this.lifes = 15;
@@ -29,20 +36,21 @@ class Game
     dumpingGroundIBt = new ImageButton(0, 0, width/4, height/4, dumpingGroundImg);
     
     this.deck = getAllCards();
+    
+    for(int i=0; i<9; i++)
+    { this.drawRandomCard(); }
   }
 
   void draw()
   {
     image(screenNeutralImg,0,0,width,height);
-    image(data.getFrame(),0,0,width,height);
+    image(this.frame,0,0,width,height);
     
-    if(this.zoomedCd == null)
-    { image(cardBackImg, 0, height/4, width/4, width/4*1.4); }
-    else
+    this.zoomedCd.draw();
+    if(this.zoomedCd.fwd)
     {
       moveBt.draw();
       backBt.draw();
-      this.zoomedCd.draw();
     }
     
     menueBt.draw();
@@ -58,88 +66,8 @@ class Game
     for(Card c : this.table)
     { c.draw(); }
     
-    this.drawHand();
-  }
-
-  void mousePressed()
-  {
-    if(this.menueBt.mouseOver())
-    { changeMode = 4;}
-    else if(this.roundBt.mouseOver())
-    { this.nextRound(); }
-    else if(this.backBt.mouseOver())
-    { this.zoomedCd = null; }
-    else if(this.moveBt.mouseOver()) //todo
-    {}
-    else if(this.editBt.mouseOver())
-    { changeMode = 6; }
-    else if(this.deckIBt.mouseOver() && this.deck.size() > 0)
-    { this.drawCard(); }
-    else if(this.dumpingGroundIBt.mouseOver())
-    {
-      if(this.deadCards.size() > 0)
-      {
-        this.playCard(this.deadCards.get(this.deadCards.size()-1));
-        this.deadCards.remove(this.deadCards.size()-1);
-      }
-    }
-    else if(this.playCard())
-    { /*Things are allready done*/ }
-    else
-    { this.killCard(); }
-  }
-  
-  void nextRound()
-  {
-    this.round++;
-    this.energy = this.round;
-    this.drawReady = true;
-    if(this.energy > 10)
-    { this.energy = 10; }
-  }
-  
-  void drawCard()
-  {
-    if(this.drawReady)
-    {
-      this.drawReady = false;
-      this.drawRandomCard();
-      cardSnd.play();
-    }
-    else
-    { createError("Du hast diese Runde bereits eine Karte gezogen"); }
-  }
-  
-  void drawRandomCard()
-  {
-    int rand = int(random(0,this.deck.size()-1));
-    this.setZoomedCard(this.deck.get(rand));
-    this.giveCard(this.deck.get(rand));
-    this.deck.remove(rand);
-  }
-  
-  void playCard(Card c)
-  {
-    c.changeSize(height/4);
-    this.table.add(c);
-    spreadOutCards(this.table, width/4, width/4*3, height/7);
-  }
-  
-  void killCard()
-  {
-    if(this.table.size() > 0)
-    {
-      for(int i=0; i<this.table.size(); i++)
-      {
-        if(this.table.get(i).mouseOver())
-        {
-          this.deadCards.add(this.table.get(i));
-          this.table.remove(i);
-          spreadOutCards(this.table, width/4, width/4*3, height/7);
-          break;
-        }
-      }
-    }
+    for(Card c : this.hand)
+    { c.draw();}
   }
   
   void drawGameInfo()
@@ -161,14 +89,105 @@ class Game
       { rect(width/7*5+((width/6)/this.round)*i, height/5*4, (width/6)/this.round, height/7); }
     }*/
   }
-  
-  void drawHand()
+
+  void mousePressed()
   {
-    if(this.hand.size() > 0)
+    if(this.menueBt.mouseOver())
+    { changeMode = 4;}
+    else if(this.roundBt.mouseOver())
+    { this.nextRound(); }
+    else if(this.backBt.mouseOver() && this.zoomedCd.fwd)
+    { this.zoomedCd.fwd = false; }
+    else if(this.moveBt.mouseOver() && this.zoomedCd.fwd)
     {
-      for(Card c : this.hand)
-      { c.draw();}
+      if(this.performAction == 1)
+      {
+        this.layDownCard(this.markedCd);
+        this.performAction = 2;
+      }
+      else if(this.performAction == 2)
+      {
+        this.killCard(this.markedCd);
+        this.performAction = 3;
+      }
+      else if(this.performAction == 3)
+      {
+        this.playCard(this.deadCards.get(this.deadCards.size()-1));
+        this.deadCards.remove(this.deadCards.size()-1);
+        this.performAction = 2;
+      }
+      else
+      { createError("ERROR : 2 : "+this.performAction); }
     }
+    else if(this.editBt.mouseOver())
+    { changeMode = 6; }
+    else if(this.deckIBt.mouseOver() && this.deck.size() > 0)
+    { this.drawCard(); }
+    else if(this.dumpingGroundIBt.mouseOver() && this.deadCards.size() > 0)
+    { this.setZoomedCard(this.deadCards.get(this.deadCards.size()-1), 2); }
+    else if(this.cardListMouseOver(this.hand))
+    { this.setZoomedCard(this.cardListCardMouseOver(this.hand), 1); }
+    else if(this.cardListMouseOver(this.table))
+    { this.setZoomedCard(this.cardListCardMouseOver(this.table), 2); }
+  }
+  
+  void nextRound()
+  {
+    this.round++;
+    if(this.round > 10)
+    { this.energy = 10; }
+    else
+    { this.energy = this.round; }
+    this.drawReady = true;
+    this.zoomedCd.fwd = false;
+  }
+  
+  void drawCard()
+  {
+    if(this.drawReady)
+    {
+      this.drawReady = false;
+      this.drawRandomCard();
+      cardSnd.play();
+    }
+    else
+    { createError("Du hast diese Runde bereits eine Karte gezogen"); }
+  }
+  void drawRandomCard()
+  {
+    int rand = int(random(0,this.deck.size()-1));
+    this.setZoomedCard(this.deck.get(rand), 1);
+    this.giveCard(this.deck.get(rand));
+    this.deck.remove(rand);
+  }
+  
+  boolean layDownCard(Card c)
+  {
+    if(c.cost <= this.energy)
+    {
+      this.energy -= c.cost;
+      this.playCard(c);
+      this.hand.remove(c);
+      cardSnd.play();
+      spreadOutCards(this.hand, width/4, width/4*3, height/5*4);
+      return true;
+    }
+    else
+    { createError("Nicht genug Energie"); }
+    return false;
+  }
+  void playCard(Card c)
+  {
+    c.changeSize(height/4);
+    this.table.add(c);
+    spreadOutCards(this.table, width/4, width/4*3, height/7);
+  }
+  
+  void killCard(Card c)
+  {
+    this.deadCards.add(c);
+    this.table.remove(c);
+    spreadOutCards(this.table, width/4, width/4*3, height/7);
   }
   
   void giveCard(Card c)
@@ -178,32 +197,33 @@ class Game
     spreadOutCards(this.hand, width/4, width/4*3, height/5*4);
   }
   
-  boolean playCard()
+  boolean cardListMouseOver(ArrayList <Card> arc)
   {
-    for(int i=this.hand.size()-1; i>=0; i--) //going backwoards because then the cards displayed on top of all other cards are chosen first
+    for(int i=arc.size()-1; i>=0; i--) //going backwoards because then the cards displayed on top of all other cards are chosen first
     {
-      if(this.hand.get(i).mouseOver())
-      {
-        if(this.hand.get(i).cost <= this.energy)
-        {
-          this.energy -= this.hand.get(i).cost;
-          game.playCard(this.hand.get(i));
-          this.hand.remove(i);
-          cardSnd.play();
-          spreadOutCards(this.hand, width/4, width/4*3, height/5*4);
-          return true;
-        }
-        else
-        { createError("Nicht genug Energie"); }
-      }
+      if(arc.get(i).mouseOver())
+      { return true; }
     }
     return false;
   }
-  
-  void setZoomedCard(Card c)
+  Card cardListCardMouseOver(ArrayList <Card> arc) //only do if cardListMouseOver == true
   {
-    this.zoomedCd = c;
-    this.zoomedCd.setPosition(0, height/4);
-    this.zoomedCd.changeSize(height/4*3);
+    for(int i=arc.size()-1; i>=0; i--)
+    {
+      if(arc.get(i).mouseOver())
+      { return arc.get(i); }
+    }
+    return this.markedCd;
+  }
+  
+  void setZoomedCard(Card c, int act)
+  {
+    this.zoomedCd.fwd = true;
+    this.performAction = act;
+    this.markedCd = c;
+    this.zoomedCd.atk = c.atk;
+    this.zoomedCd.dfp = c.dfp;
+    this.zoomedCd.cost = c.cost;
+    this.zoomedCd.name = c.name;
   }
 }

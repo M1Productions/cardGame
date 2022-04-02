@@ -21,9 +21,9 @@ class data //this class contains all information that is saved in a file
   
   void saveAcc()
   {
-    fM.account.clear();
-    fM.account.add(this.team);
-    fM.save(fM.account, "account.eck");
+    String[] accData = new String[1];
+    accData[0] = this.team;
+    fM.fileSave(accData, "account.eck");
   }
   
   PImage getBg()

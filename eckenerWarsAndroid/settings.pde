@@ -12,13 +12,17 @@ class Settings
   Settings()
   {
     soundIBt = new ImageButton(width/6-height/20, height/2+height/20, height/10, height/10, loudImg);
+    menueBt = new Button(width/2-width/30, height/18, width/15, height/20, data.getBasicPrimaryColor(), "Menu", 0);
+    credsBt = new Button(width/2-width/18, height-height/5, width/9, height/10, data.getBasicPrimaryColor(), "Credits", 0);
+    volumeSl = new Slider(width/6*2, height/2+height/10, width/6*3, 50, 25, 100, data.getBasicPrimaryColor(), data.getBasicSecondaryColor());
   }
   
   void refresh()
   {
-    menueBt = new Button(width/2-width/30, height/18, width/15, height/20, data.getBasicPrimaryColor(), "Menu", 0);
-    credsBt = new Button(width/2-width/18, height-height/5, width/9, height/10, data.getBasicPrimaryColor(), "Credits", 0);
-    volumeSl = new Slider(width/6*2, height/2+height/10, width/6*3, 50, 25, 100, data.getBasicPrimaryColor(), data.getBasicSecondaryColor());
+    this.menueBt.col = data.getBasicPrimaryColor();
+    this.credsBt.col = data.getBasicPrimaryColor();
+    this.volumeSl.prim = data.getBasicPrimaryColor();
+    this.volumeSl.sec = data.getBasicSecondaryColor();
     this.img = data.getBg();
     this.changeImages();
   }
@@ -46,7 +50,7 @@ class Settings
       fM.txt.clear();
       fM.txt.add(str(data.musicVolume));
       fM.txt.add(str(data.sfxVolume));
-      fM.save(fM.txt, "settings.eck");
+      fM.fileSave(fM.txt, "settings.eck");
     }
     else if (soundIBt.mouseOver())
     {
@@ -100,7 +104,7 @@ class Settings
   void changeVolume()
   {
     this.changeImages();
-    //mainThemeSnd.amp(data.musicVolume/100);
+    mainThemeSnd.amp(data.musicVolume/100);
   }
   
   void drawCreds()
